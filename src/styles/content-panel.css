@@ -1,0 +1,204 @@
+/* Content Panel Overlay */
+.content-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 40px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.content-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Backdrop */
+.content-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+/* Card */
+.content-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(35, 25, 35, 0.98) 0%, rgba(45, 30, 45, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 160, 122, 0.15);
+  transform: translateX(50px);
+  opacity: 0;
+  animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.content-overlay:not(.visible) .content-card {
+  animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideOut {
+  to {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: all 0.25s ease;
+}
+
+.close-btn svg {
+  width: 100%;
+  height: 100%;
+  stroke: rgba(255, 200, 180, 0.7);
+}
+
+.close-btn:hover {
+  background: rgba(255, 160, 122, 0.2);
+  transform: rotate(90deg);
+}
+
+.close-btn:hover svg {
+  stroke: #ffa07a;
+}
+
+/* Icon */
+.content-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+/* Header */
+.content-header {
+  margin-bottom: 16px;
+}
+
+.content-subtitle {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--accent, #ffa07a);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.content-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+/* Description */
+.content-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(240, 225, 215, 0.85);
+  margin-bottom: 20px;
+}
+
+/* List */
+.content-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.content-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: rgba(230, 215, 205, 0.9);
+  padding: 8px 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: fadeInItem 0.4s ease forwards;
+}
+
+@keyframes fadeInItem {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, #ffa07a);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--accent, #ffa07a);
+}
+
+/* Hint */
+.content-hint {
+  font-size: 0.7rem;
+  color: rgba(180, 160, 150, 0.5);
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content-overlay {
+    padding: 20px;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .content-card {
+    max-width: 100%;
+    border-radius: 24px 24px 16px 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  .content-title {
+    font-size: 1.5rem;
+  }
+}

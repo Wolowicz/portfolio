@@ -1,0 +1,84 @@
+/* Dark Sunset Navigation */
+.navigation {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.nav-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 107, 157, 0.3);
+  border: 2px solid rgba(255, 107, 157, 0.5);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+
+.nav-dot:hover {
+  background: rgba(255, 107, 157, 0.6);
+  border-color: #ff6b9d;
+  transform: scale(1.3);
+}
+
+.nav-dot.active {
+  background: linear-gradient(135deg, #ff6b9d, #c44569);
+  border-color: #ff6b9d;
+  box-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
+  transform: scale(1.2);
+}
+
+.nav-label {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffa07a;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  background: rgba(30, 20, 30, 0.95);
+  padding: 8px 14px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  border: 1px solid rgba(255, 107, 157, 0.4);
+}
+
+.nav-dot:hover .nav-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-8px);
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    right: 15px;
+  }
+  
+  .nav-dots {
+    gap: 15px;
+  }
+  
+  .nav-dot {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .nav-label {
+    display: none;
+  }
+}
