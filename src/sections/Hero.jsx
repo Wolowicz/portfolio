@@ -13,19 +13,19 @@ function Hero({ isActive, registerRef }) {
   return (
     <section className={`section hero-section ${isActive ? 'active' : ''}`} id="hero">
       <div className="hero-content" ref={contentRef}>
-        <p className="hero-greeting">WELCOME TO MY WORLD</p>
+        <p className="hero-greeting">Hello, I'm</p>
         <h1 className="hero-name">Patrycja Wołowicz</h1>
-        <p className="hero-title">Environment Artist & Creative Technologist</p>
+        <p className="hero-title">Aspiring Environment & Concept Artist</p>
         <p className="hero-description">
-          Building immersive worlds where technology meets artistic vision.
-          Specializing in environment design, 3D visualization, and interactive experiences.
+          Computer Science Engineering student developing skills in 2D and 3D art for games.
+          Focused on visual storytelling, atmosphere, and collaborative game development.
         </p>
         <div className="hero-cta">
           <a href="#projects" className="cta-button primary">
-            ✨ View My Work
+            View Projects
           </a>
           <a href="#contact" className="cta-button secondary">
-            💬 Get In Touch
+            Contact Me
           </a>
         </div>
       </div>

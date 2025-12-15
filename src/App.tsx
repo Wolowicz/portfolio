@@ -85,24 +85,25 @@ function App() {
           <div className="hero-content">
             <p className="hero-greeting">Hello, I'm</p>
             <h1 className="hero-name">Patrycja Wołowicz</h1>
-            <h2 className="hero-title">Environment Artist & Creative Technologist</h2>
+            <h2 className="hero-title">Aspiring Environment & Concept Artist</h2>
+            <p className="hero-subtitle">Art | Technology | Team Projects</p>
             <p className="hero-tagline">
-              Creating immersive 3D worlds, blending technology with artistic vision.
+              Computer Science Engineering student developing skills in 2D and 3D art for games.
               <br />
-              Building atmospheric spaces that tell stories.
+              Focused on visual storytelling, atmosphere, and collaborative game development.
             </p>
             <div className="hero-cta">
               <button 
                 className="cta-button primary"
                 onClick={() => goToSection('projects')}
               >
-                🚀 View Projects
+                View Projects
               </button>
               <button 
                 className="cta-button secondary"
                 onClick={() => goToSection('contact')}
               >
-                💬 Contact Me
+                Contact Me
               </button>
             </div>
           </div>

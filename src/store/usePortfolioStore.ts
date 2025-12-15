@@ -24,10 +24,10 @@ export const SECTIONS: Section[] = [
   {
     id: 'hero',
     title: 'Patrycja Wołowicz',
-    subtitle: 'Environment Artist & Creative Technologist',
-    description: 'Creating immersive 3D worlds, blending technology with artistic vision. Building atmospheric spaces that tell stories.',
+    subtitle: 'Aspiring Environment & Concept Artist',
+    description: 'Computer Science Engineering student developing skills in 2D and 3D art for games. Focused on visual storytelling, atmosphere, and collaborative game development.',
     color: '#ffb87a',
-    icon: '🎨',
+    icon: 'H',
     cameraPosition: {
       position: new THREE.Vector3(0, 2, 12),
       target: new THREE.Vector3(0, 0, 0)
@@ -37,96 +37,93 @@ export const SECTIONS: Section[] = [
     id: 'about',
     title: 'About Me',
     subtitle: 'Who I Am',
-    description: 'Creative technologist passionate about building immersive environments. Blending engineering precision with artistic expression.',
+    description: 'Computer Science Engineering student with a strong interest in art, game development, and visual design. Combining technical education with creative projects.',
     color: '#8b5cf6',
-    icon: '✨',
+    icon: 'A',
     cameraPosition: {
       position: new THREE.Vector3(-1, 2, 10),
       target: new THREE.Vector3(0, 0, 0)
     },
     items: [
-      '🎨 Artistic Approach',
-      '🎮 Game Development & Jams',
-      '⚙️ Blender & SolidWorks',
-      '🌐 Three.js & Web 3D'
+      'Artistic Approach',
+      'Game Development & Jams',
+      'Blender & SolidWorks',
+      'Three.js & Web 3D'
     ]
   },
   {
     id: 'skills',
     title: 'Skills',
-    subtitle: 'My Tools',
+    subtitle: 'Tools & Expertise',
     description: 'Technologies and tools I use to bring ideas to life.',
     color: '#f59e0b',
-    icon: '⚡',
+    icon: 'S',
     cameraPosition: {
       position: new THREE.Vector3(-6, 2, 8),
       target: new THREE.Vector3(-1, 0, 0)
     },
     items: [
-      '🎨 Environment Design',
-      '💻 Blender & 3D Modeling',
-      '🎮 Unity & Game Jams',
-      '🖼️ Pixel Art & Concept Art',
-      '🌐 Three.js & React',
-      '⚙️ SolidWorks & CAD'
+      'Environment Design',
+      'Blender & 3D Modeling',
+      'Unity & Game Jams',
+      'Pixel Art & Concept Art',
+      'Three.js & React',
+      'SolidWorks & CAD'
     ]
   },
   {
     id: 'projects',
     title: 'Projects',
     subtitle: 'My Work',
-    description: 'A collection of projects showcasing my skills and creativity.',
+    description: 'A collection of projects showcasing my skills in game development and visual design.',
     color: '#10b981',
-    icon: '🚀',
+    icon: 'P',
     cameraPosition: {
       position: new THREE.Vector3(3, 1, 3),
       target: new THREE.Vector3(-1, 0, 0)
     },
     items: [
-      '🏠 Interactive 3D Portfolio',
-      '🎮 Arcade Space Shooter (Team Lead)',
-      '🎨 Cyberiada - Pixel Art',
-      '🔧 Project Meduza - SolidWorks'
+      'Interactive 3D Portfolio',
+      'Unity Game Project (Team Lead)',
+      'Cyberiada - Pixel Art',
+      'Project Meduza - SolidWorks'
     ],
     links: [
-      { label: 'GitHub', url: 'https://github.com/Wolowicz', icon: '🔗' },
-      { label: 'ArtStation', url: '#', icon: '🎨' }
+      { label: 'GitHub', url: 'https://github.com/Wolowicz', icon: 'GH' }
     ]
   },
   {
-    id: 'gallery',
-    title: 'Gallery',
-    subtitle: 'Visual Journey',
-    description: 'A visual showcase of my artistic work and experiments.',
+    id: 'fitforjob',
+    title: 'Fit for a Job',
+    subtitle: 'Why Me',
+    description: 'Artistic sensitivity, technical awareness, and experience working in teams under pressure.',
     color: '#06b6d4',
-    icon: '🖼️',
+    icon: 'F',
     cameraPosition: {
       position: new THREE.Vector3(-5, 3, 8),
       target: new THREE.Vector3(0, 0, 0)
     },
     items: [
-      '✏️ Hobby Art & Sketches',
-      '🎨 Concept Art',
-      '🏠 3D Environments',
-      '🎮 Game Assets'
+      'Adaptable & Quick Learner',
+      'Responsible & Organized',
+      'Team Player Under Pressure',
+      'Delivery-Oriented'
     ]
   },
   {
     id: 'contact',
     title: 'Contact',
-    subtitle: "Let's Connect",
-    description: "Have a project in mind? Let's create something amazing together!",
+    subtitle: 'Get In Touch',
+    description: 'Environment & Concept Art Portfolio',
     color: '#ec4899',
-    icon: '💬',
+    icon: 'C',
     cameraPosition: {
       position: new THREE.Vector3(0, 2, 10),
       target: new THREE.Vector3(0, 0, 0)
     },
     links: [
-      { label: 'Email', url: 'mailto:patrycja.wolowicz@example.com', icon: '📧' },
-      { label: 'GitHub', url: 'https://github.com/Wolowicz', icon: '💻' },
-      { label: 'LinkedIn', url: 'https://linkedin.com', icon: '💼' },
-      { label: 'ArtStation', url: 'https://artstation.com', icon: '🎨' }
+      { label: 'Email', url: 'mailto:pati.wolowicz@gmail.com', icon: 'E' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/patrycja-wo%C5%82owicz-979613329', icon: 'LI' }
     ]
   }
 ]
@@ -207,6 +204,7 @@ const usePortfolioStore = create<PortfolioState>((set, get) => ({
   setTransitioning: (transitioning) => set({ isTransitioning: transitioning }),
   setPanelVisible: (visible) => set({ panelVisible: visible }),
   setMousePosition: (x, y) => set({ mousePosition: { x, y } })
+
 }))
 
 export default usePortfolioStore

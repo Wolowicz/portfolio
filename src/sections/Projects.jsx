@@ -13,29 +13,34 @@ function Projects({ isActive, registerRef }) {
   const projects = [
     {
       title: 'Interactive 3D Room Portfolio',
-      description: 'A stylized environment serving as an interactive portfolio space. Features scroll-driven camera movement, warm lighting, and carefully composed scenes that guide viewers through my work.',
-      tech: ['Three.js', 'React Three Fiber', 'Blender'],
+      description: 'Ever wondered how a portfolio can become an experience? This stylized 3D room reacts to your scroll and clicks, guiding you through my work with camera movement and animation. Can you spot all the interactive elements?',
+      details: 'Focus: Mood, atmosphere, lighting, color, composition, and interactive presentation.',
+      tech: ['Three.js', 'React', 'Blender'],
       highlight: true
     },
     {
-      title: 'Unity Arcade Game — Team Leader',
-      description: 'Leading a student team developing an arcade-style shooter inspired by Chicken Invaders. Responsible for team coordination, task planning, creative direction, and maintaining visual consistency across all game assets.',
-      tech: ['Unity', 'C#', 'Team Leadership']
+      title: 'Unity Game Project - Team Leader',
+      description: 'Arcade-style game inspired by Chicken Invaders. As team leader, I planned sprints, kept the team motivated, and made sure art and code worked together. What would you do differently in a fast-paced student project?',
+      details: 'Developed leadership skills and understanding of team-based creative workflows.',
+      tech: ['Unity', 'Team Leadership', 'Creative Direction']
     },
     {
-      title: 'Cyberiada Competition — 2D Pixel Artist',
-      description: 'Two-time competitor creating pixel art assets and visual concepts for game jam-style competitions. Delivered polished game graphics under strict time constraints while collaborating with programmers and designers.',
-      tech: ['Pixel Art', 'Game Assets', 'Team Collaboration']
+      title: 'Cyberiada - National Championship (x2)',
+      description: 'Two-time finalist as 2D pixel art artist. My job? Create assets and concepts on the fly, working closely with programmers. How do you keep your creativity flowing under time pressure?',
+      details: 'Required fast iteration, adaptability, and clear visual communication under time constraints.',
+      tech: ['Pixel Art', 'Concept Art', 'Team Collaboration']
     },
     {
-      title: 'Game Jams — 5+ Participations',
-      description: 'Rapid prototyping and creative problem-solving under pressure. Each jam strengthened my ability to iterate quickly, communicate with team members, and deliver playable experiences within 48-72 hours.',
-      tech: ['Rapid Prototyping', 'Teamwork', 'Creative Problem Solving']
+      title: 'Game Jams (5+)',
+      description: 'Five game jams, five unique teams, countless ideas. I learned to prototype fast, solve problems creatively, and focus on what really matters: atmosphere and clarity. What would you build in 48 hours?',
+      details: 'Prioritizing atmosphere and clarity over unnecessary complexity.',
+      tech: ['Rapid Prototyping', 'Teamwork', 'Problem Solving']
     },
     {
-      title: 'Project Meduza — Mechanical Design',
-      description: 'Designed a sealed mechanical cover for a robotic jellyfish as part of a government-funded academic project. Created in SolidWorks with focus on form, functionality, environmental constraints, and underwater durability.',
-      tech: ['SolidWorks', 'Mechanical Design', 'Academic Research']
+      title: 'Project Meduza - Academic Project',
+      description: 'How do you design for the real world? In this government-funded project, I created a sealed mechanical cover for a robotic jellyfish, balancing durability, form, and constraints. Would your design survive underwater?',
+      details: 'Strengthened understanding of design decisions interacting with real-world constraints.',
+      tech: ['SolidWorks', 'Mechanical Design', 'Research']
     }
   ]
 

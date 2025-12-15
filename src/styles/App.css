@@ -158,9 +158,18 @@ body {
   font-size: clamp(1rem, 3vw, 1.6rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 2rem 0;
+  margin: 0 0 0.5rem 0;
   letter-spacing: 3px;
   animation: slideDown 0.8s ease-out 0.7s both;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 184, 122, 0.9);
+  margin: 0 0 2rem 0;
+  letter-spacing: 2px;
+  font-weight: 500;
+  animation: slideDown 0.8s ease-out 0.8s both;
 }
 
 .hero-tagline {
