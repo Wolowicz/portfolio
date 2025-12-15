@@ -1,0 +1,267 @@
+/* Overlay styles */
+
+/* Hint message */
+.overlay-hint {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  animation: fadeInUp 0.8s ease-out 2s both;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.overlay-hint p {
+  margin: 0 0 0.5rem 0;
+}
+
+.hint-arrow {
+  display: inline-block;
+  animation: bounce 1.5s ease-in-out infinite;
+  font-size: 1.5rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Backdrop */
+.overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 15;
+  animation: fadeIn 0.3s ease-out;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Content panel */
+.overlay-panel {
+  position: fixed;
+  top: 50%;
+  right: -450px;
+  transform: translateY(-50%);
+  width: 380px;
+  max-width: 90vw;
+  max-height: 80vh;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 25, 35, 0.95) 0%,
+    rgba(20, 18, 25, 0.98) 100%
+  );
+  border-radius: 20px;
+  padding: 2rem;
+  overflow-y: auto;
+  z-index: 20;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 100px rgba(255, 184, 122, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.overlay-panel.active {
+  right: 2rem;
+}
+
+/* Panel accent line */
+.panel-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 20px 0 0 20px;
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Panel title */
+.panel-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+/* Panel description */
+.panel-description {
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Panel items list */
+.panel-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.panel-items li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  animation: slideInLeft 0.4s ease-out both;
+}
+
+.panel-items li:last-child {
+  border-bottom: none;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Panel links */
+.panel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.panel-links a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  animation: slideInUp 0.4s ease-out both;
+}
+
+.panel-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar for panel */
+.overlay-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overlay-panel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.overlay-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.overlay-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .overlay-panel {
+    right: 0;
+    bottom: -100%;
+    top: auto;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 20px 20px 0 0;
+    transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .overlay-panel.active {
+    right: 0;
+    bottom: 0;
+  }
+  
+  .panel-accent {
+    width: 100%;
+    height: 4px;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .overlay-hint {
+    bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+}
