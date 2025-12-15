@@ -21,14 +21,14 @@ function Contact({ isActive, registerRef }) {
         </p>
         
         <div className="contact-methods">
-          <a href="mailto:your.email@example.com" className="contact-method">
+          <a href="mailto:pati.wolowicz@gmail.com" className="contact-method">
             <div className="contact-icon">✉️</div>
             <div className="contact-info">
               <h4>Email Me</h4>
-              <p>your.email@example.com</p>
+              <p>pati.wolowicz@gmail.com</p>
             </div>
           </a>
-          <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="contact-method">
+          <a href="https://www.linkedin.com/in/patrycja-wo%C5%82owicz-979613329?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BQS870lcbR2uCkDB3kK%2BV8g%3D%3D" target="_blank" rel="noopener noreferrer" className="contact-method">
             <div className="contact-icon">💼</div>
             <div className="contact-info">
               <h4>LinkedIn</h4>

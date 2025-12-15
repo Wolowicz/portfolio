@@ -70,6 +70,8 @@ function App() {
     }
   }, [handleWheel, handleKeyDown, handleMouseMove])
   
+  const isHeroSection = currentSection.id === 'hero'
+  
   return (
     <div className="app">
       {/* Full-screen 3D Canvas */}
@@ -77,48 +79,80 @@ function App() {
         <Scene />
       </div>
       
-      {/* Content Panel - animated */}
-      <div 
-        className={`content-panel ${panelVisible ? 'visible' : ''}`}
-        style={{ '--accent-color': currentSection.color } as React.CSSProperties}
-      >
-        <div className="panel-icon">{currentSection.icon}</div>
-        <span className="panel-subtitle">{currentSection.subtitle}</span>
-        <h1 className="panel-title">{currentSection.title}</h1>
-        <p className="panel-description">{currentSection.description}</p>
-        
-        {currentSection.items && (
-          <ul className="panel-items">
-            {currentSection.items.map((item, index) => (
-              <li 
-                key={index} 
-                className="panel-item"
-                style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+      {/* Hero Section - Full Screen Intro */}
+      {isHeroSection && panelVisible && (
+        <div className="hero-overlay">
+          <div className="hero-content">
+            <p className="hero-greeting">Hello, I'm</p>
+            <h1 className="hero-name">Patrycja Wołowicz</h1>
+            <h2 className="hero-title">Environment Artist & Creative Technologist</h2>
+            <p className="hero-tagline">
+              Creating immersive 3D worlds, blending technology with artistic vision.
+              <br />
+              Building atmospheric spaces that tell stories.
+            </p>
+            <div className="hero-cta">
+              <button 
+                className="cta-button primary"
+                onClick={() => goToSection('projects')}
               >
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
-        
-        {currentSection.links && (
-          <div className="panel-links">
-            {currentSection.links.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="panel-link"
-                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+                🚀 View Projects
+              </button>
+              <button 
+                className="cta-button secondary"
+                onClick={() => goToSection('contact')}
               >
-                {link.icon && <span className="link-icon">{link.icon}</span>}
-                {link.label}
-              </a>
-            ))}
+                💬 Contact Me
+              </button>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+      
+      {/* Content Panel - for other sections */}
+      {!isHeroSection && (
+        <div 
+          className={`content-panel ${panelVisible ? 'visible' : ''}`}
+          style={{ '--accent-color': currentSection.color } as React.CSSProperties}
+        >
+          <div className="panel-icon">{currentSection.icon}</div>
+          <span className="panel-subtitle">{currentSection.subtitle}</span>
+          <h1 className="panel-title">{currentSection.title}</h1>
+          <p className="panel-description">{currentSection.description}</p>
+          
+          {currentSection.items && (
+            <ul className="panel-items">
+              {currentSection.items.map((item, index) => (
+                <li 
+                  key={index} 
+                  className="panel-item"
+                  style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+          
+          {currentSection.links && (
+            <div className="panel-links">
+              {currentSection.links.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="panel-link"
+                  style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+                >
+                  {link.icon && <span className="link-icon">{link.icon}</span>}
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
       
       {/* Navigation dots */}
       <nav className="section-nav">

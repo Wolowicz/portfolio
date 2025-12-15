@@ -62,10 +62,10 @@ export default function Scene({ className, style }: SceneProps) {
       style={style}
       dpr={[1, 2]}
       camera={{
-        fov: 45,
+        fov: 50,
         near: 0.1,
         far: 100,
-        position: [0, 12, 20]
+        position: [0, 2, 12]
       }}
       gl={{
         antialias: true,

@@ -23,52 +23,52 @@ export interface Section {
 export const SECTIONS: Section[] = [
   {
     id: 'hero',
-    title: 'Welcome',
-    subtitle: 'Creative Developer',
-    description: 'Building immersive digital experiences',
+    title: 'Patrycja Wołowicz',
+    subtitle: 'Environment Artist & Creative Technologist',
+    description: 'Creating immersive 3D worlds, blending technology with artistic vision. Building atmospheric spaces that tell stories.',
     color: '#ffb87a',
-    icon: '✨',
+    icon: '🎨',
     cameraPosition: {
-      position: new THREE.Vector3(0, 3.5, 8),
-      target: new THREE.Vector3(0, 1, 0)
+      position: new THREE.Vector3(0, 2, 12),
+      target: new THREE.Vector3(0, 0, 0)
     }
   },
   {
     id: 'about',
     title: 'About Me',
     subtitle: 'Who I Am',
-    description: 'Passionate developer crafting beautiful, interactive web experiences. I blend creativity with technical expertise to build memorable digital products.',
+    description: 'Creative technologist passionate about building immersive environments. Blending engineering precision with artistic expression.',
     color: '#8b5cf6',
-    icon: '👨‍💻',
+    icon: '✨',
     cameraPosition: {
-      position: new THREE.Vector3(-4, 2.5, 4),
-      target: new THREE.Vector3(-2, 1, 0)
+      position: new THREE.Vector3(-1, 2, 10),
+      target: new THREE.Vector3(0, 0, 0)
     },
     items: [
-      '🎨 Creative Problem Solver',
-      '💡 UI/UX Enthusiast', 
-      '🚀 Continuous Learner',
-      '🌍 Open Source Contributor'
+      '🎨 Artistic Approach',
+      '🎮 Game Development & Jams',
+      '⚙️ Blender & SolidWorks',
+      '🌐 Three.js & Web 3D'
     ]
   },
   {
     id: 'skills',
     title: 'Skills',
-    subtitle: 'What I Do',
+    subtitle: 'My Tools',
     description: 'Technologies and tools I use to bring ideas to life.',
     color: '#f59e0b',
     icon: '⚡',
     cameraPosition: {
-      position: new THREE.Vector3(3, 3, 5),
-      target: new THREE.Vector3(1.5, 1.5, 0)
+      position: new THREE.Vector3(-6, 2, 8),
+      target: new THREE.Vector3(-1, 0, 0)
     },
     items: [
-      '⚛️ React & TypeScript',
-      '🎮 Three.js & WebGL',
-      '🖥️ Node.js & Python',
-      '🎨 Figma & UI Design',
-      '📱 React Native',
-      '☁️ AWS & Cloud'
+      '🎨 Environment Design',
+      '💻 Blender & 3D Modeling',
+      '🎮 Unity & Game Jams',
+      '🖼️ Pixel Art & Concept Art',
+      '🌐 Three.js & React',
+      '⚙️ SolidWorks & CAD'
     ]
   },
   {
@@ -79,53 +79,54 @@ export const SECTIONS: Section[] = [
     color: '#10b981',
     icon: '🚀',
     cameraPosition: {
-      position: new THREE.Vector3(4, 2, 3),
-      target: new THREE.Vector3(2, 1.5, -1)
+      position: new THREE.Vector3(3, 1, 3),
+      target: new THREE.Vector3(-1, 0, 0)
     },
     items: [
-      '🌐 3D Portfolio Website',
-      '📊 Interactive Data Viz',
-      '📱 Mobile Applications',
-      '🎮 WebGL Games'
+      '🏠 Interactive 3D Portfolio',
+      '🎮 Arcade Space Shooter (Team Lead)',
+      '🎨 Cyberiada - Pixel Art',
+      '🔧 Project Meduza - SolidWorks'
     ],
     links: [
-      { label: 'GitHub', url: 'https://github.com', icon: '🔗' },
-      { label: 'Live Demo', url: '#', icon: '🌐' }
+      { label: 'GitHub', url: 'https://github.com/Wolowicz', icon: '🔗' },
+      { label: 'ArtStation', url: '#', icon: '🎨' }
     ]
   },
   {
     id: 'gallery',
     title: 'Gallery',
     subtitle: 'Visual Journey',
-    description: 'A visual showcase of my creative work and experiments.',
+    description: 'A visual showcase of my artistic work and experiments.',
     color: '#06b6d4',
-    icon: '🎨',
+    icon: '🖼️',
     cameraPosition: {
-      position: new THREE.Vector3(-3, 4, 5),
-      target: new THREE.Vector3(0, 1, 0)
+      position: new THREE.Vector3(-5, 3, 8),
+      target: new THREE.Vector3(0, 0, 0)
     },
     items: [
-      '🖼️ UI/UX Designs',
-      '🎬 Motion Graphics',
-      '📸 Photography',
-      '✏️ Illustrations'
+      '✏️ Hobby Art & Sketches',
+      '🎨 Concept Art',
+      '🏠 3D Environments',
+      '🎮 Game Assets'
     ]
   },
   {
     id: 'contact',
     title: 'Contact',
     subtitle: "Let's Connect",
-    description: "Got a project in mind? Let's make something amazing together!",
+    description: "Have a project in mind? Let's create something amazing together!",
     color: '#ec4899',
     icon: '💬',
     cameraPosition: {
-      position: new THREE.Vector3(0, 2, 6),
-      target: new THREE.Vector3(0, 1, 0)
+      position: new THREE.Vector3(0, 2, 10),
+      target: new THREE.Vector3(0, 0, 0)
     },
     links: [
-      { label: 'Email Me', url: 'mailto:hello@example.com', icon: '📧' },
+      { label: 'Email', url: 'mailto:patrycja.wolowicz@example.com', icon: '📧' },
+      { label: 'GitHub', url: 'https://github.com/Wolowicz', icon: '💻' },
       { label: 'LinkedIn', url: 'https://linkedin.com', icon: '💼' },
-      { label: 'Twitter', url: 'https://twitter.com', icon: '🐦' }
+      { label: 'ArtStation', url: 'https://artstation.com', icon: '🎨' }
     ]
   }
 ]

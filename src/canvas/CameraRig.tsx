@@ -6,7 +6,7 @@ import usePortfolioStore from '../store/usePortfolioStore'
 
 export default function CameraRig() {
   const { camera } = useThree()
-  const targetRef = useRef(new THREE.Vector3(0, 1, 0))
+  const targetRef = useRef(new THREE.Vector3(0, 0, 0))
   const isAnimating = useRef(false)
   
   const currentSection = usePortfolioStore((s) => s.currentSection)
@@ -18,8 +18,8 @@ export default function CameraRig() {
   useEffect(() => {
     if (introComplete) return
     
-    // Start from dramatic position
-    camera.position.set(0, 12, 20)
+    // Start from dramatic position for hero (no room visible)r
+    camera.position.set(0, 8, 15)
     camera.lookAt(0, 0, 0)
     
     const tl = gsap.timeline({

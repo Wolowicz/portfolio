@@ -8,17 +8,21 @@ import usePortfolioStore from '../store/usePortfolioStore'
 interface RoomProps {
   position?: [number, number, number]
   scale?: number
+  rotation?: [number, number, number]
 }
 
 export default function Room({ 
   position = [0, 0, 0], 
-  scale = 1 
+  scale = 2.8,
+  rotation = [0, Math.PI * 2.2, 0] // 180 degrees
 }: RoomProps) {
   const groupRef = useRef<THREE.Group>(null)
-  const { scene } = useGLTF('/Room_1214203420_texture.glb')
+  const hasAnimated = useRef(false)
+  const { scene } = useGLTF('/room.glb')
   
   const introComplete = usePortfolioStore((s) => s.introComplete)
   const currentSection = usePortfolioStore((s) => s.currentSection)
+  const isHeroSection = currentSection.id === 'hero'
   
   // Setup scene on mount - enable shadows
   useEffect(() => {
@@ -31,21 +35,25 @@ export default function Room({
         mesh.receiveShadow = true
       }
     })
+  }, [scene])
+  
+  // Intro animation when room becomes visible (not on hero)
+  useEffect(() => {
+    if (!groupRef.current || isHeroSection || hasAnimated.current) return
     
-    // Intro animation - scale the whole room
-    if (groupRef.current && !introComplete) {
-      groupRef.current.scale.set(0, 0, 0)
-      
-      gsap.to(groupRef.current.scale, {
-        x: scale,
-        y: scale,
-        z: scale,
-        duration: 1.5,
-        delay: 0.3,
-        ease: 'elastic.out(1, 0.5)'
-      })
-    }
-  }, [scene, introComplete, scale])
+    // Animate room entrance
+    hasAnimated.current = true
+    groupRef.current.scale.set(0, 0, 0)
+    
+    gsap.to(groupRef.current.scale, {
+      x: scale,
+      y: scale,
+      z: scale,
+      duration: 1.8,
+      delay: 0.5,
+      ease: 'elastic.out(1, 0.5)'
+    })
+  }, [isHeroSection, scale])
   
   // Subtle floating animation
   useFrame((state) => {
@@ -60,11 +68,16 @@ export default function Room({
     groupRef.current.scale.setScalar(scale * breathe)
   })
   
+  // Don't render room on hero section
+  if (isHeroSection) {
+    return null
+  }
+  
   return (
-    <group ref={groupRef} position={position}>
+    <group ref={groupRef} position={position} rotation={rotation}>
       <primitive object={scene} />
     </group>
   )
 }
 
-useGLTF.preload('/Room_1214203420_texture.glb')
+useGLTF.preload('/room.glb')
