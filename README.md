@@ -11,6 +11,16 @@ A modern, scroll-driven 3D portfolio website built with React, Three.js, and Rea
 - 📱 Fully responsive design
 - 🚀 Production-ready and optimized
 
+## Nowości (grudzień 2025) ✅
+
+- **Optymalizacje mobilne:** DPR jest teraz dynamicznie ograniczany, a antialias/shadows są wyłączane na urządzeniach niskiej mocy, co znacznie redukuje przycięcia.
+- **Throttling i oszczędność CPU/GPU:** kosztowne operacje per-frame i obsługa wskaźnika zostały odciążone przez throttling.
+- **Fallback dla mobilnych modeli:** jeśli chcesz zoptymalizować mobilne ładowanie, dodaj `room_mobile.glb` do `public/` — aplikacja załaduje wersję o niższych wymaganiach na słabszych urządzeniach.
+- **Analiza bundla:** uruchom `npm run build:analyze` aby wygenerować `dist/stats.html` i sprawdzić rozmiary chunków i zależności.
+- **Poprawki typów:** dodano `src/store/useInteractionStore.d.ts` aby usunąć błąd braku deklaracji TypeScript.
+- **UX:** dodano subtelny dolny pasek z wskazaniem przewijania (tylko na hero), większe i bardziej czytelne kropki nawigacji, oraz `center-stage` layout łączący model z panelem.
+- **Inne:** wrap-around nawigacji sekcji (Contact → Hero), poprawione pozycjonowanie modelu, i ogólne poprawki CSS/odpowiedzialności.
+
 ## Tech Stack
 
 - **React 18** - UI library
