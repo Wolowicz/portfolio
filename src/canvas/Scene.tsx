@@ -1,11 +1,12 @@
-import { Suspense } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment, Preload } from '@react-three/drei'
 import * as THREE from 'three'
-import Room from './Room'
+const Room = lazy(() => import('./Room'))
 import CameraRig from './CameraRig'
 import Lights from './Lights'
-import Effects from './Effects'
+const Effects = lazy(() => import('./Effects'))
+import usePerformance from '../utils/usePerformance'
 
 // Loading fallback with spinner
 function Loader() {
@@ -18,21 +19,24 @@ function Loader() {
 }
 
 // Scene content wrapper
-function SceneContent() {
+function SceneContent({ perf }: { perf: { lowPower: boolean } }) {
   return (
     <>
       {/* Custom lighting */}
-      <Lights />
+      <Lights lowPerformance={perf.lowPower} />
       
       {/* Camera rig with smooth transitions */}
       <CameraRig />
       
       {/* Ambient effects - particles, orbs, rays */}
-      <Effects />
+      <Suspense fallback={null}>
+        <Effects mode={perf.lowPower ? 'low' : 'high'} />
+      </Suspense>
       
       {/* Main room model */}
       <Suspense fallback={<Loader />}>
-        <Room />
+        {/* Shift room slightly to the right and up to avoid overlapping centered panel */}
+        <Room position={[3, 3, 0]} enableShadows={!perf.lowPower} />
         
         {/* Soft environment lighting */}
         <Environment 
@@ -56,11 +60,14 @@ interface SceneProps {
 }
 
 export default function Scene({ className, style }: SceneProps) {
+  const perf = usePerformance()
+  const enableShadows = !perf.lowPower
+
   return (
     <Canvas
       className={className}
       style={style}
-      dpr={[1, 2]}
+      dpr={perf.dpr}
       camera={{
         fov: 50,
         near: 0.1,
@@ -68,16 +75,16 @@ export default function Scene({ className, style }: SceneProps) {
         position: [0, 2, 12]
       }}
       gl={{
-        antialias: true,
+        antialias: !perf.lowPower,
         alpha: false,
-        powerPreference: 'high-performance',
+        powerPreference: perf.lowPower ? 'low-power' : 'high-performance',
         toneMapping: THREE.ACESFilmicToneMapping,
         toneMappingExposure: 1.1,
       }}
-      shadows="soft"
+      shadows={enableShadows ? 'soft' : false}
     >
       <color attach="background" args={['#0f0a0d']} />
-      <SceneContent />
+      <SceneContent perf={perf} />
     </Canvas>
   )
 }

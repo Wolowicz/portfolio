@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import usePortfolioStore from '../store/usePortfolioStore'
 
 // Floating particles for ambient effect
-export function FloatingParticles({ count = 100 }) {
+export function FloatingParticles({ count = 100 }: { count?: number }) {
   const meshRef = useRef<THREE.Points>(null)
   const currentSection = usePortfolioStore((s) => s.currentSection)
   
@@ -25,9 +25,14 @@ export function FloatingParticles({ count = 100 }) {
     return { positions, scales, speeds }
   }, [count])
   
-  useFrame((state) => {
+  // Throttle updates a bit to reduce CPU on lower-power devices
+  const accumulator = useRef(0)
+  useFrame((state, delta) => {
     if (!meshRef.current) return
-    
+    accumulator.current += delta
+    if (accumulator.current < 1 / 30) return // update ~30fps
+    accumulator.current = 0
+
     const positions = meshRef.current.geometry.attributes.position.array as Float32Array
     const time = state.clock.elapsedTime
     
@@ -154,12 +159,17 @@ export function LightRays() {
   )
 }
 
-export default function Effects() {
+export default function Effects({ mode = 'high' }: { mode?: 'high' | 'low' | 'off' }) {
+  if (mode === 'off') return null
+
+  const particleCount = mode === 'low' ? 40 : 150
+  const orbCount = mode === 'low' ? 3 : 8
+
   return (
     <>
-      <FloatingParticles count={150} />
-      <GlowingOrbs count={8} />
-      <LightRays />
+      <FloatingParticles count={particleCount} />
+      <GlowingOrbs count={orbCount} />
+      {mode === 'low' ? null : <LightRays />}
     </>
   )
 }

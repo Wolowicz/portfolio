@@ -13,13 +13,7 @@ export default function HeroSection() {
           <br />
           Building atmospheric spaces that tell stories.
         </p>
-        <div className="scroll-indicator">
-          <span className="scroll-text">Scroll to explore</span>
-          <div className="scroll-arrow">
-            <span></span>
-            <span></span>
-          </div>
-        </div>
+
       </div>
     </section>
   )

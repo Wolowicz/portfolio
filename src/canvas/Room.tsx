@@ -4,35 +4,42 @@ import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'
 import * as THREE from 'three'
 import usePortfolioStore from '../store/usePortfolioStore'
+import usePerformance from '../utils/usePerformance'
 
 interface RoomProps {
   position?: [number, number, number]
   scale?: number
   rotation?: [number, number, number]
+  enableShadows?: boolean
 }
 
 export default function Room({ 
   position = [0, 0, 0], 
-  scale = 2.8,
-  rotation = [0, Math.PI * 2.2, 0] // 180 degrees
+  scale = 2.9,
+  rotation = [0, Math.PI * 2.2, 0], // 180 degrees
+  enableShadows = true
 }: RoomProps) {
   const groupRef = useRef<THREE.Group>(null)
   const hasAnimated = useRef(false)
-  const { scene } = useGLTF('/room.glb')
+  const perf = usePerformance()
+  const modelPath = perf.lowPower ? '/room_mobile.glb' : '/room.glb'
+  const { scene } = useGLTF(modelPath)
   
   const introComplete = usePortfolioStore((s) => s.introComplete)
   const currentSection = usePortfolioStore((s) => s.currentSection)
   const isHeroSection = currentSection.id === 'hero'
   
-  // Setup scene on mount - enable shadows
+  // Setup scene on mount - enable shadows on capable devices
   useEffect(() => {
     if (!scene) return
-    
+    const perf = usePerformance()
+
     scene.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh
-        mesh.castShadow = true
-        mesh.receiveShadow = true
+        const shadowsEnabled = enableShadows && !perf.lowPower
+        mesh.castShadow = !!shadowsEnabled
+        mesh.receiveShadow = !!shadowsEnabled
       }
     })
   }, [scene])
@@ -81,3 +88,4 @@ export default function Room({
 }
 
 useGLTF.preload('/room.glb')
+useGLTF.preload('/room_mobile.glb')

@@ -4,25 +4,31 @@ import * as THREE from 'three'
 interface LightsProps {
   ambientIntensity?: number
   mainIntensity?: number
+  lowPerformance?: boolean
 }
 
 export default function Lights({ 
   ambientIntensity = 0.4, 
-  mainIntensity = 1.2 
+  mainIntensity = 1.2,
+  lowPerformance = false
 }: LightsProps) {
+  const shadowMapSize = lowPerformance ? 512 : 2048
+  const effectiveAmbient = lowPerformance ? ambientIntensity * 0.9 : ambientIntensity
+  const effectiveMain = lowPerformance ? mainIntensity * 0.9 : mainIntensity
+
   return (
     <>
       {/* Ambient light for base illumination */}
-      <ambientLight intensity={ambientIntensity} color="#ffeedd" />
+      <ambientLight intensity={effectiveAmbient} color="#ffeedd" />
       
       {/* Main directional light (sunlight) */}
       <directionalLight
         position={[5, 8, 4]}
-        intensity={mainIntensity}
+        intensity={effectiveMain}
         color="#fff5e6"
-        castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        castShadow={!lowPerformance}
+        shadow-mapSize-width={shadowMapSize}
+        shadow-mapSize-height={shadowMapSize}
         shadow-camera-near={0.1}
         shadow-camera-far={50}
         shadow-camera-left={-10}
@@ -35,14 +41,14 @@ export default function Lights({
       {/* Fill light from opposite side */}
       <directionalLight
         position={[-3, 4, -2]}
-        intensity={mainIntensity * 0.3}
+        intensity={effectiveMain * 0.3}
         color="#aaccff"
       />
       
       {/* Rim light for depth */}
       <directionalLight
         position={[0, 5, -5]}
-        intensity={mainIntensity * 0.2}
+        intensity={effectiveMain * 0.2}
         color="#ffddcc"
       />
       

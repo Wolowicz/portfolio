@@ -285,6 +285,101 @@ body {
   50% { transform: translateY(-10px); }
 }
 
+/* Center-stage layout: group panel and model together in the middle */
+.center-stage {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  width: min(1100px, 92%);
+  z-index: 20;
+  pointer-events: none; /* allow clicks to canvas except inside panel */
+}
+
+.panel-wrapper {
+  position: relative;
+  max-width: 520px;
+  width: min(520px, 46%);
+  z-index: 30;
+  padding: 2.5rem;
+  background: var(--bg-panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel-wrapper.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panel-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-color, var(--accent));
+  border-radius: 24px 24px 0 0;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.panel-wrapper.visible::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Slightly lighter panel for About section to increase contrast */
+.panel-wrapper.light {
+  background: linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.015));
+  border-color: rgba(255,255,255,0.09);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  transition: background 240ms ease, border-color 240ms ease;
+}
+
+.panel-wrapper.light .panel-subtitle,
+.panel-wrapper.light .panel-title,
+.panel-wrapper.light .panel-description {
+  color: rgba(255,245,240,0.95);
+}
+
+.model-spacer {
+  width: min(560px, 48%);
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Stack vertically on small screens */
+@media (max-width: 900px) {
+  .center-stage {
+    flex-direction: column;
+    gap: 2rem;
+    top: 48%;
+  }
+
+  .panel-wrapper {
+    width: calc(100% - 3rem);
+    max-width: 900px;
+  }
+
+  .model-spacer {
+    width: 100%;
+    height: 360px; /* give some space for the model to fit visuals */
+    opacity: 0.7;
+  }
+}
+
 .panel-subtitle {
   display: block;
   color: var(--accent-color, var(--accent));
@@ -412,14 +507,14 @@ body {
 }
 
 .nav-dot {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   animation: fadeInRight 0.5s forwards;
   opacity: 0;
   transform: translateX(20px);
@@ -434,13 +529,13 @@ body {
 
 .nav-dot:hover {
   background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.3);
+  transform: scale(1.18);
 }
 
 .nav-dot.active {
   background: var(--dot-color, var(--accent));
   border-color: var(--dot-color, var(--accent));
-  transform: scale(1.4);
+  transform: scale(1.3);
   box-shadow: 0 0 20px var(--dot-color, var(--accent));
 }
 
@@ -483,39 +578,130 @@ body {
 }
 
 /* ============================================
-   SCROLL INDICATOR
+   BOTTOM BAR (contains subtle scroll indicator)
+   ============================================ */
+
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60; /* above overlays/panels so the hint is always visible */
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.02));
+}
+
+/* Scroll indicator inside the bottom bar */
+.bottom-bar .scroll-indicator {
+  position: static;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.22s ease;
+  pointer-events: none;
+}
+
+/* ============================================
+   SCROLL INDICATOR (bottom-center, subtle)
    ============================================ */
 
 .scroll-indicator {
   position: fixed;
-  bottom: 3rem;
   left: 50%;
+  bottom: 2.5rem; /* small padding area at the bottom */
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  z-index: 50;
+  gap: 6px;
+  z-index: 40; /* above canvas but below overlays */
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.35s ease, bottom 0.22s ease;
   pointer-events: none;
 }
 
-.scroll-indicator.visible {
-  opacity: 1;
+/* When hero overlay is active, the overlay sits above the bottom bar so the indicator stays under it by design. */
+.scroll-indicator.visible, .bottom-bar .scroll-indicator.visible {
+  opacity: 0.95;
 }
 
-.scroll-indicator span {
-  font-size: 0.75rem;
+.scroll-indicator .scroll-text {
+  font-size: 0.9rem; /* slightly larger for glyph clarity */
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--text-secondary);
+  letter-spacing: 1.4px;
+  color: rgba(255,255,255,0.85);
+  background: rgba(0,0,0,0.28); /* subtle dark pill */
+  padding: 6px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
+/* Small arrow below the pill */
 .scroll-arrow {
-  font-size: 1.2rem;
-  animation: bounce 2s infinite;
-  color: var(--accent);
+  font-size: 0.9rem;
+  color: rgba(255,200,160,0.9);
+  margin-top: 2px;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* On small screens, keep indicator centered and slightly higher */
+@media (max-width: 640px) {
+  .scroll-indicator {
+    bottom: 3.5rem;
+  }
+  .app.overlay-active .scroll-indicator {
+    bottom: 5rem;
+  }
+  .scroll-indicator .scroll-text {
+    font-size: 0.9rem;
+    padding: 4px 10px;
+    color: rgba(255,255,255,0.8);
+    background: rgba(0,0,0,0.36);
+  }
+}
+
+/* Nudge animation (one-shot) */
+.scroll-indicator.nudge {
+  animation: nudge 1.2s cubic-bezier(.2,.9,.28,1) 1;
+}
+
+@keyframes nudge {
+  0% { transform: translateY(0) scale(1); opacity: 0.95 }
+  30% { transform: translateY(-6px) scale(1.02); opacity: 1 }
+  70% { transform: translateY(2px) scale(0.995); opacity: 0.98 }
+  100% { transform: translateY(0) scale(1); opacity: 0.95 }
+}
+
+/* Short viewports: avoid overlap by increasing offset */
+@media (max-height: 700px) {
+  .app.overlay-active .scroll-indicator {
+    bottom: 4.5rem;
+  }
+}
+
+/* Accessible screen-reader-only text */
+.sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
 }
 
 @keyframes bounce {
@@ -635,8 +821,8 @@ body {
   }
   
   .nav-dot {
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
   }
   
   .section-counter {
@@ -679,8 +865,8 @@ body {
   }
   
   .nav-dot {
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
   }
   
   .dot-tooltip {

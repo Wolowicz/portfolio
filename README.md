@@ -79,6 +79,16 @@ npm run build
 
 The built files will be in the `dist/` folder.
 
+### Analyze Bundle
+
+To generate a bundle analysis (visual report), run:
+
+```bash
+npm run build:analyze
+```
+
+This creates `dist/stats.html` — open it to inspect chunk sizes and library contributions.
+
 ### Preview Production Build
 
 Preview the production build locally:

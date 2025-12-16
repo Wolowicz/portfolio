@@ -1,5 +1,6 @@
-import { useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef, useState } from 'react'
 import Scene from './canvas/Scene'
+import ExpandedPanel from './components/ExpandedPanel'
 import usePortfolioStore, { SECTIONS } from './store/usePortfolioStore'
 import './styles/App.css'
 
@@ -16,6 +17,7 @@ function App() {
   const prevSection = usePortfolioStore((s) => s.prevSection)
   const goToSection = usePortfolioStore((s) => s.goToSection)
   const setMousePosition = usePortfolioStore((s) => s.setMousePosition)
+  const openExpandedPanel = usePortfolioStore((s) => s.openExpandedPanel)
   
   // Handle wheel scroll for section navigation
   const handleWheel = useCallback((e: WheelEvent) => {
@@ -71,9 +73,20 @@ function App() {
   }, [handleWheel, handleKeyDown, handleMouseMove])
   
   const isHeroSection = currentSection.id === 'hero'
+  const [showNudge, setShowNudge] = useState(false)
+
+  useEffect(() => {
+    // play a single nudge animation when landing on the hero section
+    if (isHeroSection) {
+      setShowNudge(true)
+      const t = setTimeout(() => setShowNudge(false), 1400)
+      return () => clearTimeout(t)
+    }
+    return
+  }, [isHeroSection])
   
   return (
-    <div className="app">
+    <div className={`app ${isHeroSection && panelVisible ? 'overlay-active' : ''}`}>
       {/* Full-screen 3D Canvas */}
       <div className="canvas-container">
         <Scene />
@@ -85,12 +98,12 @@ function App() {
           <div className="hero-content">
             <p className="hero-greeting">Hello, I'm</p>
             <h1 className="hero-name">Patrycja Wołowicz</h1>
-            <h2 className="hero-title">Aspiring Environment & Concept Artist</h2>
-            <p className="hero-subtitle">Art | Technology | Team Projects</p>
+            <h2 className="hero-title">Aspiring Concept Artist Bridging Art & Tech</h2>
+            <p className="hero-subtitle">Migration Project Leader | Junior Network Engineer</p>
             <p className="hero-tagline">
-              Computer Science Engineering student developing skills in 2D and 3D art for games.
+              I am a Computer Science Engineering student developing my skills in 2D and 3D art, enjoying working on team-based projects.
               <br />
-              Focused on visual storytelling, atmosphere, and collaborative game development.
+              My focus is on visual aesthetics storytelling, atmosphere, and collaborative game development.
             </p>
             <div className="hero-cta">
               <button 
@@ -110,50 +123,65 @@ function App() {
         </div>
       )}
       
-      {/* Content Panel - for other sections */}
+      {/* Content Panel - center grouped with model for other sections */}
       {!isHeroSection && (
-        <div 
-          className={`content-panel ${panelVisible ? 'visible' : ''}`}
-          style={{ '--accent-color': currentSection.color } as React.CSSProperties}
-        >
-          <div className="panel-icon">{currentSection.icon}</div>
-          <span className="panel-subtitle">{currentSection.subtitle}</span>
-          <h1 className="panel-title">{currentSection.title}</h1>
-          <p className="panel-description">{currentSection.description}</p>
-          
-          {currentSection.items && (
-            <ul className="panel-items">
-              {currentSection.items.map((item, index) => (
-                <li 
-                  key={index} 
-                  className="panel-item"
-                  style={{ animationDelay: `${0.3 + index * 0.1}s` }}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          )}
-          
-          {currentSection.links && (
-            <div className="panel-links">
-              {currentSection.links.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="panel-link"
-                  style={{ animationDelay: `${0.5 + index * 0.1}s` }}
-                >
-                  {link.icon && <span className="link-icon">{link.icon}</span>}
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          )}
+        <div className={`center-stage ${panelVisible ? 'visible' : ''}`} style={{ '--accent-color': currentSection.color } as React.CSSProperties}>
+          <div className={`panel-wrapper ${panelVisible ? 'visible' : ''} ${['about','skills','projects','fitforjob','contact'].includes(currentSection.id) ? 'light' : ''}`}>
+            <div className="panel-icon">{currentSection.icon}</div>
+            <span className="panel-subtitle">{currentSection.subtitle}</span>
+            <h1 className="panel-title">{currentSection.title}</h1>
+            <p className="panel-description">{currentSection.description}</p>
+            
+            {currentSection.items && (
+              <ul className="panel-items">
+                {currentSection.items.map((item, index) => (
+                  <li 
+                    key={index} 
+                    className="panel-item"
+                    style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+            
+            {currentSection.links && (
+              <div className="panel-links">
+                {currentSection.links.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="panel-link"
+                    style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+                  >
+                    {link.icon && <span className="link-icon">{link.icon}</span>}
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* Expand button */}
+            <button
+              className="expand-btn"
+              aria-label="Expand"
+              onClick={() => openExpandedPanel()}
+              title="Expand"
+            >
+              →
+            </button>
+          </div>
+
+          {/* Invisible spacer represents the model area so the pair is centered */}
+          <div className="model-spacer" aria-hidden />
         </div>
       )}
+
+      {/* Expanded view */}
+      <ExpandedPanel />
       
       {/* Navigation dots */}
       <nav className="section-nav">
@@ -175,10 +203,13 @@ function App() {
         ))}
       </nav>
       
-      {/* Scroll indicator */}
-      <div className={`scroll-indicator ${introComplete && !isTransitioning ? 'visible' : ''}`}>
-        <span>Scroll to explore</span>
-        <div className="scroll-arrow">↓</div>
+      {/* Scroll indicator (hidden when hero overlay is active) */}
+      <div className="bottom-bar" aria-hidden>
+        <div className={`scroll-indicator ${(!isTransitioning && isHeroSection) ? 'visible' : ''} ${showNudge ? 'nudge' : ''}`} role="status" aria-label="Scroll to explore">
+          <span className="scroll-text" aria-hidden="true">Scroll To Explore</span>
+          <span className="sr-only">Scroll to explore</span>
+          <div className="scroll-arrow" aria-hidden>↓</div>
+        </div>
       </div>
       
       {/* Section counter */}

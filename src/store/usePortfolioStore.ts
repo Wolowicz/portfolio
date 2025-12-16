@@ -17,6 +17,9 @@ export interface Section {
   cameraPosition: CameraPosition
   items?: string[]
   links?: { label: string; url: string; icon?: string }[]
+  // Expanded panel content
+  fullContent?: string[]
+  fullBullets?: string[]
 }
 
 // Sekcje z pozycjami kamery - kamera będzie się przemieszczać między obiektami
@@ -27,10 +30,10 @@ export const SECTIONS: Section[] = [
     subtitle: 'Aspiring Environment & Concept Artist',
     description: 'Computer Science Engineering student developing skills in 2D and 3D art for games. Focused on visual storytelling, atmosphere, and collaborative game development.',
     color: '#ffb87a',
-    icon: 'H',
+    icon: '🙋‍♀️',
     cameraPosition: {
-      position: new THREE.Vector3(0, 2, 12),
-      target: new THREE.Vector3(0, 0, 0)
+      position: new THREE.Vector3(0, 3, 12),
+      target: new THREE.Vector3(0, -1, 0)
     }
   },
   {
@@ -39,16 +42,26 @@ export const SECTIONS: Section[] = [
     subtitle: 'Who I Am',
     description: 'Computer Science Engineering student with a strong interest in art, game development, and visual design. Combining technical education with creative projects.',
     color: '#8b5cf6',
-    icon: 'A',
+    icon: '✨',
     cameraPosition: {
-      position: new THREE.Vector3(-1, 2, 10),
-      target: new THREE.Vector3(0, 0, 0)
+      position: new THREE.Vector3(-2, 3, 9),
+      target: new THREE.Vector3(-0.9, -0.5, 0)
     },
     items: [
       'Artistic Approach',
       'Game Development & Jams',
       'Blender & SolidWorks',
       'Three.js & Web 3D'
+    ],
+    fullContent: [
+      'I am a Computer Science Engineering student passionate about visual storytelling and environment design. I combine technical problem-solving with artistic sensibility to create immersive experiences that communicate mood and narrative.',
+      'My work spans 2D and 3D, including concept art, environment design, and interactive web experiences. I enjoy collaborating with interdisciplinary teams and learning new tools to push visual design forward.',
+      'I approach projects with attention to composition, lighting, and atmosphere — always focused on clear communication and polish.'
+    ],
+    fullBullets: [
+      'Strong foundation in 3D modeling and texturing',
+      'Experience with Blender, Three.js, and game engines',
+      'Collaborative mindset and iterative design process'
     ]
   },
   {
@@ -57,10 +70,10 @@ export const SECTIONS: Section[] = [
     subtitle: 'Tools & Expertise',
     description: 'Technologies and tools I use to bring ideas to life.',
     color: '#f59e0b',
-    icon: 'S',
+    icon: '🎯',
     cameraPosition: {
-      position: new THREE.Vector3(-6, 2, 8),
-      target: new THREE.Vector3(-1, 0, 0)
+      position: new THREE.Vector3(-5, 3, 7),
+      target: new THREE.Vector3(-1, 0, -1)
     },
     items: [
       'Environment Design',
@@ -69,6 +82,15 @@ export const SECTIONS: Section[] = [
       'Pixel Art & Concept Art',
       'Three.js & React',
       'SolidWorks & CAD'
+    ],
+    fullContent: [
+      'My technical skillset allows me to move rapidly from concept to polished assets. I specialize in environment composition, lighting, and asset optimization for interactive applications.',
+      'I prioritize readability and performance while maintaining an aesthetic that supports the project’s narrative and gameplay goals.'
+    ],
+    fullBullets: [
+      'Asset creation: modeling, UVs, texturing',
+      'Realtime pipelines: optimization and LOD',
+      'Tooling: Three.js, React, Unity integration'
     ]
   },
   {
@@ -77,10 +99,10 @@ export const SECTIONS: Section[] = [
     subtitle: 'My Work',
     description: 'A collection of projects showcasing my skills in game development and visual design.',
     color: '#10b981',
-    icon: 'P',
+    icon: '💡',
     cameraPosition: {
-      position: new THREE.Vector3(3, 1, 3),
-      target: new THREE.Vector3(-1, 0, 0)
+      position: new THREE.Vector3(3, 1, 6),
+      target: new THREE.Vector3(0, -1, 0)
     },
     items: [
       'Interactive 3D Portfolio',
@@ -90,6 +112,15 @@ export const SECTIONS: Section[] = [
     ],
     links: [
       { label: 'GitHub', url: 'https://github.com/Wolowicz', icon: 'GH' }
+    ],
+    fullContent: [
+      'Projects illustrate my capacity to lead and execute: I have delivered interactive web experiences, led small teams in game jams, and produced both 2D and 3D assets to shipping quality.',
+      'Each project focuses on solving design constraints efficiently while preserving an original visual voice.'
+    ],
+    fullBullets: [
+      'Interactive portfolio with real-time 3D presentation',
+      'Game design and implementation during jams',
+      'Cross-disciplinary collaboration and documentation'
     ]
   },
   {
@@ -98,16 +129,25 @@ export const SECTIONS: Section[] = [
     subtitle: 'Why Me',
     description: 'Artistic sensitivity, technical awareness, and experience working in teams under pressure.',
     color: '#06b6d4',
-    icon: 'F',
+    icon: '💼',
     cameraPosition: {
-      position: new THREE.Vector3(-5, 3, 8),
-      target: new THREE.Vector3(0, 0, 0)
+      position: new THREE.Vector3(5, 3, 8),
+      target: new THREE.Vector3(0, -1, 0)
     },
     items: [
       'Adaptable & Quick Learner',
       'Responsible & Organized',
       'Team Player Under Pressure',
       'Delivery-Oriented'
+    ],
+    fullContent: [
+      'I bring a professional mindset to every assignment: clear communication, punctual delivery, and a willingness to adapt to changing priorities. I excel in iterative environments where feedback is frequent and actionable.',
+      'I aim to contribute not just as an artist, but as a reliable team member who understands technical constraints and product timelines.'
+    ],
+    fullBullets: [
+      'Reliable communicator across disciplines',
+      'Focused on delivering production-ready assets',
+      'Comfortable with technical constraints and pipelines'
     ]
   },
   {
@@ -116,10 +156,10 @@ export const SECTIONS: Section[] = [
     subtitle: 'Get In Touch',
     description: 'Environment & Concept Art Portfolio',
     color: '#ec4899',
-    icon: 'C',
+    icon: '🗨️',
     cameraPosition: {
       position: new THREE.Vector3(0, 2, 10),
-      target: new THREE.Vector3(0, 0, 0)
+      target: new THREE.Vector3(-0.5, -0.5, 0)
     },
     links: [
       { label: 'Email', url: 'mailto:pati.wolowicz@gmail.com', icon: 'E' },
@@ -127,6 +167,12 @@ export const SECTIONS: Section[] = [
     ]
   }
 ]
+
+// Quick lookup for content by id/category
+export const SECTION_CONTENT: Record<string, Section> = SECTIONS.reduce((acc, s) => {
+  acc[s.id] = s
+  return acc
+}, {} as Record<string, Section>)
 
 // Store state interface
 interface PortfolioState {
@@ -138,6 +184,10 @@ interface PortfolioState {
   introComplete: boolean
   isTransitioning: boolean
   panelVisible: boolean
+  // Expanded panel state
+  expandedPanelOpen: boolean
+  openExpandedPanel: () => void
+  closeExpandedPanel: () => void
   
   // Mouse position for parallax
   mousePosition: { x: number; y: number }
@@ -160,6 +210,7 @@ const usePortfolioStore = create<PortfolioState>((set, get) => ({
   introComplete: false,
   isTransitioning: false,
   panelVisible: false,
+  expandedPanelOpen: false,
   mousePosition: { x: 0, y: 0 },
   
   // Actions
@@ -187,22 +238,30 @@ const usePortfolioStore = create<PortfolioState>((set, get) => ({
   nextSection: () => {
     const { currentSectionIndex, isTransitioning } = get()
     if (isTransitioning) return
+    // Wrap to first section when reaching the end
     if (currentSectionIndex < SECTIONS.length - 1) {
       get().setCurrentSectionIndex(currentSectionIndex + 1)
+    } else {
+      get().setCurrentSectionIndex(0)
     }
   },
   
   prevSection: () => {
     const { currentSectionIndex, isTransitioning } = get()
     if (isTransitioning) return
+    // Wrap to last section when going back from first
     if (currentSectionIndex > 0) {
       get().setCurrentSectionIndex(currentSectionIndex - 1)
+    } else {
+      get().setCurrentSectionIndex(SECTIONS.length - 1)
     }
   },
   
   setIntroComplete: (complete) => set({ introComplete: complete, panelVisible: complete }),
   setTransitioning: (transitioning) => set({ isTransitioning: transitioning }),
   setPanelVisible: (visible) => set({ panelVisible: visible }),
+  openExpandedPanel: () => set({ expandedPanelOpen: true }),
+  closeExpandedPanel: () => set({ expandedPanelOpen: false }),
   setMousePosition: (x, y) => set({ mousePosition: { x, y } })
 
 }))

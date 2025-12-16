@@ -3,6 +3,7 @@ import { useGLTF, Html } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import useInteractionStore from '../store/useInteractionStore'
+import usePerformance from '../utils/usePerformance'
 
 // Content for each interactive object
 const CONTENT_DATA = {
@@ -102,11 +103,12 @@ function Room() {
   // Identify interactive meshes on load
   useEffect(() => {
     const interactive = []
+    const perf = usePerformance()
     
     scene.traverse((child) => {
       if (child.isMesh) {
-        child.castShadow = true
-        child.receiveShadow = true
+        child.castShadow = !perf.lowPower
+        child.receiveShadow = !perf.lowPower
         
         const name = child.name.toLowerCase()
         
