@@ -12,7 +12,12 @@ export default defineConfig({
       '@canvas': path.resolve(__dirname, './src/canvas'),
       '@store': path.resolve(__dirname, './src/store'),
       '@styles': path.resolve(__dirname, './src/styles'),
+      'react': path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
     },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@react-three/fiber', '@react-three/drei', 'three'],
   },
   server: {
     port: 3000,
