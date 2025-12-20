@@ -27,17 +27,12 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false
-    ,
+    sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('three') || id.includes('@react-three') || id.includes('gsap')) {
-              return 'three-vendor'
-            }
-            return 'vendor'
-          }
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei', 'gsap'],
         }
       }
     }
